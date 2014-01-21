@@ -5,7 +5,6 @@
     <target name="createDir">
         <mkdir dir="build"></mkdir>
         <mkdir dir="build/lib"></mkdir>
-        <mkdir dir="build/External-Libraries"></mkdir>
     </target>
     <target name="compile" depends="createDir">
         <mkdir dir="build/classes"></mkdir>
@@ -15,14 +14,11 @@
     <target name="createSrcJar" depends="compile">
         <jar destfile="build/lib/expr-eval.jar" basedir="build/classes"></jar>
     </target>
-    <target name="copyJunitJar" depends="createSrcJar">
-        <copy file="dependencies/junit-4.10.jar" todir="build/External-Libraries"></copy>
-    </target>
 
-    <target name="compileTest" depends="copyJunitJar">
+    <target name="compileTest" depends="createSrcJar">
         <mkdir dir="build/TestClasses"></mkdir>
         <javac srcdir="test" destdir="build/TestClasses"
-               classpath="build/lib/expr-eval.jar;build/External-Libraries/junit-4.10.jar"
+               classpath="build/lib/expr-eval.jar;dependencies/junit-4.10.jar"
                includeantruntime="false"></javac>
     </target>
 
@@ -38,7 +34,7 @@
                     <include name="**/*Test*"/>
                 </fileset>
             </batchtest>
-            <formatter type = "brief" usefile = "false"/>
+            <formatter type="brief" usefile="false"/>
         </junit>
     </target>
 
@@ -58,9 +54,8 @@
     </target>
 
     <target name="createZip" depends="createDist">
-        <zip zipFile="build/dist/expe-eval.zip" basedir="build/dist"></zip>
-        <delete dir="build/dist/bin"></delete>
-        <delete dir="build/dist/lib"></delete>
-        <delete file="build/dist/README.md"></delete>
+        <zip zipFile="dist/expe-eval.zip" basedir="build/dist"></zip>
+
+        <delete dir="build/dist/"></delete>
     </target>
 </project>
