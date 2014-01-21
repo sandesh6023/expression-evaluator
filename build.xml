@@ -35,7 +35,7 @@
             </classpath>
             <batchtest>
                 <fileset dir="build/TestClasses">
-                    <include name="**/Test"/>
+                    <include name="**/*Test*"/>
                 </fileset>
             </batchtest>
             <formatter type = "brief" usefile = "false"/>

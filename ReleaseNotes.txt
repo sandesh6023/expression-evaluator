@@ -1,3 +1,9 @@
 RELEASE NOTES
 
+
 0.0 developed
+
+Getting zip file
+- After cloning, execute build.xml by using command "ant createZip"
+You will get build file
+build/dist/expe_eval.zip
