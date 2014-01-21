@@ -27,7 +27,7 @@
             <classpath>
                 <pathelement location="build/classes"/>
                 <pathelement location="build/TestClasses"/>
-                <pathelement location="build/External-Libraries/junit-4.10.jar"/>
+                <pathelement location="dependencies/junit-4.10.jar"/>
             </classpath>
             <batchtest>
                 <fileset dir="build/TestClasses">
