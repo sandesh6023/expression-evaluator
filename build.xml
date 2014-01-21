@@ -1,0 +1,66 @@
+<project name="expression-evaluator">
+    <target name="clean">
+        <delete dir="build"></delete>
+    </target>
+    <target name="createDir">
+        <mkdir dir="build"></mkdir>
+        <mkdir dir="build/lib"></mkdir>
+        <mkdir dir="build/External-Libraries"></mkdir>
+    </target>
+    <target name="compile" depends="createDir">
+        <mkdir dir="build/classes"></mkdir>
+        <javac srcdir="src" destdir="build/classes" includeantruntime="false"></javac>
+    </target>
+
+    <target name="createSrcJar" depends="compile">
+        <jar destfile="build/lib/expr-eval.jar" basedir="build/classes"></jar>
+    </target>
+    <target name="copyJunitJar" depends="createSrcJar">
+        <copy file="dependencies/junit-4.10.jar" todir="build/External-Libraries"></copy>
+    </target>
+
+    <target name="compileTest" depends="copyJunitJar">
+        <mkdir dir="build/TestClasses"></mkdir>
+        <javac srcdir="test" destdir="build/TestClasses"
+               classpath="build/lib/expr-eval.jar;build/External-Libraries/junit-4.10.jar"
+               includeantruntime="false"></javac>
+    </target>
+
+    <target name="runTest" depends="compileTest">
+        <junit>
+            <classpath>
+                <pathelement location="build/classes"/>
+                <pathelement location="build/TestClasses"/>
+                <pathelement location="build/External-Libraries/junit-4.10.jar"/>
+            </classpath>
+            <batchtest>
+                <fileset dir="build/TestClasses">
+                    <include name="**/Test"/>
+                </fileset>
+            </batchtest>
+            <formatter type = "brief" usefile = "false"/>
+        </junit>
+    </target>
+
+    <target name="createDist" depends="runTest">
+        <mkdir dir="build/dist"></mkdir>
+        <mkdir dir="build/dist/bin"></mkdir>
+        <mkdir dir="build/dist/lib"></mkdir>
+
+        <copy todir="build/dist/lib">
+            <fileset dir="build/lib"/>
+        </copy>
+        <copy todir="build/dist/bin">
+            <fileset dir="tool-script"/>
+        </copy>
+        <copy file="README.md" todir="build/dist">
+        </copy>
+    </target>
+
+    <target name="createZip" depends="createDist">
+        <zip zipFile="build/dist/expe-eval.zip" basedir="build/dist"></zip>
+        <delete dir="build/dist/bin"></delete>
+        <delete dir="build/dist/lib"></delete>
+        <delete file="build/dist/README.md"></delete>
+    </target>
+</project>
