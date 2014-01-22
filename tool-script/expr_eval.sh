@@ -1,1 +1,0 @@
-java -cp $EXP_EVAL/lib/expr-eval.jar sandeshm.expeval.main.ExpressionEvalMain "${@}"
