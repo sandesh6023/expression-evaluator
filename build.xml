@@ -1,6 +1,8 @@
 <project name="expression-evaluator">
     <target name="clean">
         <delete dir="build"></delete>
+        <delete dir="dist"></delete>
+
     </target>
     <target name="createDir">
         <mkdir dir="build"></mkdir>
