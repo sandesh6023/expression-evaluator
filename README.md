@@ -1,10 +1,24 @@
 Expression Evaluator
 ====================
-Run the below command to get zip file
-ant createZip.
-It will give dist folder. Inside dist folder zip file will be found.
 
-expr_eval.sh "[string]" will return string.
-expr_eval.sh "2 + 3" will return "2 + 3"
+####HOW TO RUN?
+set the environment variable as
+    %EVALUATOR_HOME%/bin
 
-The actual product development starts.
+####RUNNING COMMAND
+
+`$sh expr_eval.sh "[expression separated by single space]"`
+`$sh expr_eval.sh "2 + 3"`
+
+#### VERSION 0.1 [Addition,subtraction,multiplication,division,powerOf]
+
+    Product takes only two operands and an operation in between.
+
+        operator can be only ‘+’ ,'-','*','/','^'
+        operand can only be +ve integers.
+        Values should be space separated.
+        divide by zero not allowed
+
+    SAMPLE: "2 + 3"
+
+
