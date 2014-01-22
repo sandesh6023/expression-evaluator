@@ -7,11 +7,44 @@ import static org.junit.Assert.assertEquals;
 
 public class expressionEvaluatorTest {
     @Test
-    public void testEvaluateExpression() throws Exception {
+    public void testEvaluateExpressionShouldReturnSumOfNumbers() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
 
-        String actual = eval.evaluateExpression("2 + 3");
-        String expected = "2 + 3";
+        int actual = eval.evaluateExpression("2 + 3");
+        int expected = 5;
+        assertEquals(actual,expected);
+    }
+    @Test
+    public void testEvaluateExpressionShouldSubtractNumbers() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("10 - 3");
+        int expected = 7;
+        assertEquals(actual,expected);
+    }
+    @Test
+    public void testEvaluateExpressionShouldDivideNumbers() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("12 / 3");
+        int expected = 4;
+        assertEquals(actual,expected);
+    }
+    @Test
+    public void testEvaluateExpressionShouldMultiplyNumbers() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("12 * 3");
+        int expected = 36;
+        assertEquals(actual,expected);
+    }
+
+    @Test
+    public void testEvaluateExpressionShouldEvaluateNumberToPower() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("2 ^ 4");
+        int expected = 16;
         assertEquals(actual,expected);
     }
 }

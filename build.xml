@@ -54,7 +54,7 @@
     </target>
 
     <target name="createZip" depends="createDist">
-        <zip zipFile="dist/expe-eval.zip" basedir="build/dist"></zip>
+        <zip zipFile="dist/expr-eval.zip" basedir="build/dist"></zip>
 
         <!--<delete dir="build/dist/"></delete>-->
     </target>
