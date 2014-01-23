@@ -109,12 +109,37 @@ public class expressionEvaluatorTest {
         int expected = 8;
         assertEquals(actual,expected);
     }
-//    @Test
-//    public void testShouldEvaluateOperandsWithBrackets4() throws Exception {
-//        expressionEvaluator eval = new expressionEvaluator();
-//
-//        int actual = eval.evaluateExpression("( 2 + 5 )");
-//        int expected = 10;
-//        assertEquals(actual,expected);
-//    }
+    @Test
+    public void testShouldEvaluateOperandsWithBrackets4() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("(2 + 5)");
+        int expected = 7;
+        assertEquals(actual,expected);
+    }
+    @Test
+    public void testShouldEvaluateExpressionsWithNestedBrackets() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("1 + ((2 + 5) + 1)");
+        int expected = 9;
+        assertEquals(actual,expected);
+    }
+    @Test
+    public void testShouldEvaluateExpressionsWithNestedBrackets2() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("1 + (((2 + 5) + 1) * 5)");
+        int expected = 41;
+        assertEquals(actual,expected);
+    }
+
+    @Test
+    public void testShouldEvaluateExpressionsWithNestedBrackets3() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("(3 + (6 * 9) + 1)");
+        int expected = 58;
+        assertEquals(actual,expected);
+    }
 }

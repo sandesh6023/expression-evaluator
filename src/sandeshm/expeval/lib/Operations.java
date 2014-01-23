@@ -50,16 +50,27 @@ class Operations {
     }
 
     public String evaluateWithBrackets(String expression) throws Exception {
-        StringBuffer sb = new StringBuffer(expression);
-        int endIndex = expression.indexOf(")");
-        int startIndex = expression.indexOf("(");
+        StringBuffer exprWithBracket = new StringBuffer(expression);
+        int startIndex = 0;
+        int endIndex = 0;
+        for (int i = 0; i < expression.length(); i++) {
+            if (expression.charAt(i) == '(') {
+                startIndex = i;
+            }
+            if (expression.charAt(i) == ')') {
+                endIndex = i;
+                break;
+            }
+        }
         String expressionInBrackets = expression.substring(startIndex + 1, endIndex);
-        int res = evaluateExpressionWithParanthesis(expressionInBrackets);
-        sb.replace(startIndex, endIndex + 1, Integer.toString(res));
-        return sb.toString();
+        int result = evaluateExpressionWithParanthesis(expressionInBrackets);
+        exprWithBracket.replace(startIndex, endIndex + 1, Integer.toString(result));
+        return exprWithBracket.toString();
     }
 
     public int evaluateExpressionWithParanthesis(String expression) throws Exception {
+        if (!expression.contains(" ")) return Integer.parseInt(expression);
+
         String[] data = expression.split(" ");
         int result;
         if (expression.contains("(")) {
