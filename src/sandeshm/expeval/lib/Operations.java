@@ -32,10 +32,10 @@ class Operations {
         return operators;
     }
 
-    public int computeMultipleOperands(List<Integer> operands, List<String> operators, Operations op) {
-        int result = op.evaluate(operators.get(0), operands.get(0), operands.get(1));
+    public int computeMultipleOperands(List<Integer> operands, List<String> operators, Operations operate) {
+        int result = operate.evaluate(operators.get(0), operands.get(0), operands.get(1));
         for (int i = 1; i < operators.size(); i++) {
-            result = op.evaluate(operators.get(i), result, operands.get(i + 1));
+            result = operate.evaluate(operators.get(i), result, operands.get(i + 1));
         }
         return result;
     }

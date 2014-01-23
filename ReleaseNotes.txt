@@ -6,3 +6,5 @@ operations that are not supported
 1) 28/3 will give 7.
  --> Input of this type is not handled.
 2) Input like 2 ^ 31 is not handled. it will not give proper input
+
+3)Brackets are not allowed in Expression
