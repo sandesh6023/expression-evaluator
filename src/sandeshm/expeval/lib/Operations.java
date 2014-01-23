@@ -82,4 +82,15 @@ class Operations {
         result = computeMultipleOperands(operands, operators);
         return result;
     }
+    public String replaceExpression(String expression) {
+        return expression.trim().replaceAll(" +", "")
+                .replaceAll("\\+", " + ")
+                .replaceAll("\\-", " - ")
+                .replaceAll("\\*", " * ")
+                .replaceAll("\\/", " / ")
+                .replaceAll("\\(", "(")
+                .replaceAll("\\)", ")")
+                .replaceAll("\\^", " ^ ")
+                .replaceFirst("^ - ", "-");
+    }
 }

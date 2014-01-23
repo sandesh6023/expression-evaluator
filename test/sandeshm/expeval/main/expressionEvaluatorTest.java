@@ -9,7 +9,7 @@ public class expressionEvaluatorTest {
     public void testEvaluateExpressionShouldReturnSumOfNumbers() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
 
-        double actual = eval.evaluateExpression("2 + 3");
+        double actual = eval.evaluateExpression("2           +             3");
         double expected = 5.0;
         assertEquals(actual,expected);
     }
@@ -36,7 +36,7 @@ public class expressionEvaluatorTest {
     public void testEvaluateExpressionShouldMultiplyNumbers() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
 
-        double actual = eval.evaluateExpression("12 * 3");
+        double actual = eval.evaluateExpression("12*3");
         double expected = 36;
         assertEquals(actual, expected);
     }
