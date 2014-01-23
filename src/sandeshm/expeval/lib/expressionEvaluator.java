@@ -8,7 +8,7 @@ public class expressionEvaluator {
         String[] splittedExpression = newExpression.split(" ");
 
         if (isParanthesisInExpr != -1)
-            return operate.evaluateExpressionWithParanthesis(expression);
+            return operate.evaluateExpressionWithParanthesis(newExpression);
 
         return operate.evaluateMultipleOperands(splittedExpression);
     }

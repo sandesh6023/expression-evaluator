@@ -63,7 +63,7 @@ public class expressionEvaluatorTest {
     public void testShouldEvaluateMultipleOperands2() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
 
-        double actual = eval.evaluateExpression("2 + 4 - 3 * 2");
+        double actual = eval.evaluateExpression("2 +   4 - 3 * 2");
         double expected = 6;
         assertEquals(actual, expected);
     }
@@ -146,6 +146,25 @@ public class expressionEvaluatorTest {
 
         double actual = eval.evaluateExpression("(3 + (6 * 9) + 1)");
         double expected = 58;
+        assertEquals(actual, expected);
+    }
+
+    // Handling spaces
+    @Test
+    public void testShouldEvaluateExpressionsWithNestedBracketsAndHandleSpaces() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        double actual = eval.evaluateExpression("(3 +          (6* 9)+ 1)");
+        double expected = 58;
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testShouldEvaluateExpressionsWithNestedBracketsAndHandleSpaces2() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        double actual = eval.evaluateExpression("(3 +  ((6*       9)+ 1)+3)");
+        double expected = 61;
         assertEquals(actual, expected);
     }
 }
