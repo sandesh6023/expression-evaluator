@@ -2,15 +2,28 @@
     <target name="clean">
         <delete dir="build"></delete>
         <delete dir="dist"></delete>
-
     </target>
+
+    <path id="cobertura.classpath">
+        <fileset dir="dependencies">
+            <include name="cobertura-2.0.1.jar" />
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+    <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+
+
     <target name="createDir">
         <mkdir dir="build"></mkdir>
         <mkdir dir="build/lib"></mkdir>
     </target>
+
     <target name="compile" depends="createDir">
         <mkdir dir="build/classes"></mkdir>
-        <javac srcdir="src" destdir="build/classes" includeantruntime="false"></javac>
+        <javac srcdir="src" destdir="build/classes" includeantruntime="false">
+            <classpath refid="cobertura.classpath" />
+        </javac>
+
     </target>
 
     <target name="createSrcJar" depends="compile">
@@ -19,9 +32,17 @@
 
     <target name="compileTest" depends="createSrcJar">
         <mkdir dir="build/TestClasses"></mkdir>
+        <mkdir dir="build/code-coverage/instrumented" />
+        <mkdir dir="build/code-coverage/reports/xml" />
+        <mkdir dir="build/code-coverage/reports/html" />
+        <mkdir dir="build/code-coverage/coverage/xml" />
+        <mkdir dir="build/code-coverage/coverage/summaryxml" />
+        <mkdir dir="build/code-coverage/coverage/html" />
         <javac srcdir="test" destdir="build/TestClasses"
                classpath="build/lib/expr-eval.jar;dependencies/junit-4.10.jar"
-               includeantruntime="false"></javac>
+               includeantruntime="false">
+            <classpath refid="cobertura.classpath" />
+               </javac>
     </target>
 
     <target name="runTest" depends="compileTest">
@@ -40,7 +61,69 @@
         </junit>
     </target>
 
-    <target name="createDist" depends="runTest">
+    <target name="instrument" depends="runTest">
+        <delete file="cobertura.ser"/>
+        <delete dir="build/code-coverage/instrumented" />
+
+        <cobertura-instrument todir="build/code-coverage/instrumented">
+            <fileset dir="build/classes">
+                <include name="**/*.class" />
+            </fileset>
+        </cobertura-instrument>
+    </target>
+
+    <target name="test-coverage" depends="runTest">
+        <junit fork="yes" dir="." failureProperty="test.failed">
+            <classpath>
+                <pathelement location="build/code-coverage/instrumented"/>
+                <pathelement location="build/classes" />
+                <pathelement location="build/testClasses" />
+                <pathelement location="dependencies/junit-4.10.jar"/>
+            </classpath>
+
+            <classpath refid= "cobertura.classpath"/>
+
+            <formatter type="xml" />
+            <test name="testcase" todir="build/code-coverage/reports/xml" if="testcase" />
+            <batchtest todir="build/code-coverage/reports/xml" unless="testcase">
+                <fileset dir="test">
+                    <include name="**/*Test.java" />
+                </fileset>
+            </batchtest>
+        </junit>
+        <junitreport todir="build/code-coverage/reports/xml">
+            <fileset dir="build/code-coverage/reports/xml">
+                <include name="TEST-*.xml" />
+            </fileset>
+            <report format="frames" todir="build/code-coverage/reports/html" />
+        </junitreport>
+    </target>
+
+    <target name="coverage-check">
+        <cobertura-check branchrate="34" totallinerate="100" />
+    </target>
+
+    <target name="coverage-report">
+        <cobertura-report srcdir="src" destdir="build/code-coverage/coverage/xml" format="xml" />
+    </target>
+
+    <target name="summary-coverage-report">
+        <cobertura-report srcdir="src" destdir="build/code-coverage/coverage/summaryxml" format="summaryXml" />
+    </target>
+
+    <target name="alternate-coverage-report">
+        <cobertura-report destdir="build/code-coverage/coverage/html">
+            <fileset dir="src">
+                <include name="**/*.java"/>
+            </fileset>
+        </cobertura-report>
+    </target>
+    <target name="coverage"
+            depends="instrument,test-coverage,coverage-report,summary-coverage-report,alternate-coverage-report"
+            description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
+
+
+    <target name="createDist" depends="coverage">
         <mkdir dir="build/dist"></mkdir>
         <mkdir dir="build/dist/bin"></mkdir>
         <mkdir dir="build/dist/lib"></mkdir>
@@ -55,7 +138,7 @@
         </copy>
     </target>
 
-    <target name="createZip" depends="createDist">
+    <target name="dist" depends="createDist">
         <zip zipFile="dist/expr-eval.zip" basedir="build/dist"></zip>
 
         <!--<delete dir="build/dist/"></delete>-->

@@ -6,6 +6,7 @@ import sandeshm.expeval.lib.expressionEvaluator;
 import static org.junit.Assert.assertEquals;
 
 public class expressionEvaluatorTest {
+
     @Test
     public void testEvaluateExpressionShouldReturnSumOfNumbers() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
@@ -47,4 +48,14 @@ public class expressionEvaluatorTest {
         int expected = 16;
         assertEquals(actual,expected);
     }
+
+//    @Test
+//    public void testShouldEvaluateMultipleOperands() throws Exception {
+//        expressionEvaluator eval = new expressionEvaluator();
+//
+//        int actual = eval.evaluateExpression("2 + 4 + 7 * 2");
+//        int expected = 26;
+//        assertEquals(actual,expected);
+//    }
+
 }
