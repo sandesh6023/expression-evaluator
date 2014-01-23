@@ -1,10 +1,10 @@
 RELEASE NOTES
 
-0.1 developed
+0.4 developed
 
 operations that are not supported
-1) 28/3 will give 7.
  --> Input of this type is not handled.
-2) Input like 2 ^ 31 is not handled. it will not give proper input
+2) Input like 2 ^ 31 is not handled. it will not give proper output
 
-3)Brackets are not allowed in Expression
+3)Input validation is not done.
+4)Divide by zero is not handled.

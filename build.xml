@@ -1,4 +1,4 @@
-<project name="expression-evaluator">
+<project name="expression-evaluator" default = "dist">
     <target name="clean">
         <delete dir="build"></delete>
         <delete dir="dist"></delete>
@@ -27,7 +27,7 @@
     </target>
 
     <target name="createSrcJar" depends="compile">
-        <jar destfile="build/lib/expr-eval.jar" basedir="build/classes"></jar>
+        <jar destfile="build/lib/expression-evaluator.jar" basedir="build/classes"></jar>
     </target>
 
     <target name="compileTest" depends="createSrcJar">
@@ -39,7 +39,7 @@
         <mkdir dir="build/code-coverage/coverage/summaryxml" />
         <mkdir dir="build/code-coverage/coverage/html" />
         <javac srcdir="test" destdir="build/TestClasses"
-               classpath="build/lib/expr-eval.jar;dependencies/junit-4.10.jar"
+               classpath="build/lib/expression-evaluator.jar;dependencies/junit-4.10.jar"
                includeantruntime="false">
             <classpath refid="cobertura.classpath" />
                </javac>
@@ -140,7 +140,5 @@
 
     <target name="dist" depends="createDist">
         <zip zipFile="dist/expr-eval.zip" basedir="build/dist"></zip>
-
-        <!--<delete dir="build/dist/"></delete>-->
     </target>
 </project>
