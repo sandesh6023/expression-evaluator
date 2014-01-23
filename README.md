@@ -32,3 +32,16 @@ set the environment variable as
     Product doesnot handle brackets in Expressions.
 
     Example: expr_eval.sh "2 + 3 * 9" will give 45
+
+#### VERSION 0.3
+
+    ##Product takes multiple operands and operators, handles brackets.
+    ##Expression within brackets are evaluated first.
+    ##Expression will be evaluated From Left to Right.
+
+    [The constraints specified for previous version applies to this version also]
+    There must be no space between bracket and number.
+    Example:2 + (3 + 9) is allowed
+            2 + ( 3 + 9 ) is not allowed.
+
+    Example: expr_eval.sh "2 + (3 * 9)" will give 29
