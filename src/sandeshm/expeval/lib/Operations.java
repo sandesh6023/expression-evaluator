@@ -48,4 +48,22 @@ class Operations {
         int result = computeMultipleOperands(operands, operators, op);
         return result;
     }
+
+    public int evaluateExpressionWithParanthesis(String Expression) {
+        StringBuffer expression = new StringBuffer(Expression);
+        int FinalResult = 0;
+        int startIndex = expression.indexOf("(");
+        int endIndex = expression.indexOf(")");
+
+        if (startIndex == -1)
+            FinalResult = evaluateMultipleOperands(Expression.split(" "));
+
+        else if (startIndex > 0) {
+            String newstr = expression.substring(startIndex + 1, endIndex);
+            Integer result = evaluateMultipleOperands(newstr.split(" "));
+            StringBuffer ModifiedStr = expression.replace(startIndex, endIndex + 1, result.toString());
+            return evaluateExpressionWithParanthesis(ModifiedStr.toString());
+        }
+        return FinalResult;
+    }
 }

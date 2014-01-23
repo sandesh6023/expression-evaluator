@@ -83,4 +83,30 @@ public class expressionEvaluatorTest {
         int expected = 3;
         assertEquals(actual,expected);
     }
+
+    @Test
+    public void testShouldEvaluateOperandsWithBrackets() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("2 + (3 * 5)");
+        int expected = 17;
+        assertEquals(actual,expected);
+    }
+    @Test
+    public void testShouldEvaluateOperandsWithBrackets2() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("2 + (3 * 5) + (4 * 2)");
+        int expected = 25;
+        assertEquals(actual,expected);
+    }
+
+    @Test
+    public void testShouldEvaluateOperandsWithBrackets3() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        int actual = eval.evaluateExpression("2 + (5 - 3 ) + (2 ^ 2)");
+        int expected = 8;
+        assertEquals(actual,expected);
+    }
 }
