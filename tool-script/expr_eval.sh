@@ -1,1 +1,1 @@
-java -cp $EVALUATOR_HOME/lib/expr-eval.jar sandeshm.expeval.main.ExpressionEvalMain "${@}"
+java -cp $EVALUATOR_HOME/lib/expression-evaluator.jar sandeshm.expeval.main.ExpressionEvalMain "${@}"
