@@ -1,7 +1,7 @@
 package sandeshm.expeval.lib;
 
 public class expressionEvaluator {
-    public int evaluateExpression(String expression) {
+    public int evaluateExpression(String expression) throws Exception {
         int isParanthesisInExpr = expression.indexOf('(');
         String[] splittedExpression = expression.split(" ");
         Operations operate = new Operations();

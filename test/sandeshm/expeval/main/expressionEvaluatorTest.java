@@ -109,4 +109,12 @@ public class expressionEvaluatorTest {
         int expected = 8;
         assertEquals(actual,expected);
     }
+//    @Test
+//    public void testShouldEvaluateOperandsWithBrackets4() throws Exception {
+//        expressionEvaluator eval = new expressionEvaluator();
+//
+//        int actual = eval.evaluateExpression("( 2 + 5 )");
+//        int expected = 10;
+//        assertEquals(actual,expected);
+//    }
 }

@@ -32,7 +32,8 @@ class Operations {
         return operators;
     }
 
-    public int computeMultipleOperands(List<Integer> operands, List<String> operators, Operations operate) {
+    public int computeMultipleOperands(List<Integer> operands, List<String> operators) {
+        Operations operate = new Operations();
         int result = operate.evaluate(operators.get(0), operands.get(0), operands.get(1));
         for (int i = 1; i < operators.size(); i++) {
             result = operate.evaluate(operators.get(i), result, operands.get(i + 1));
@@ -44,26 +45,30 @@ class Operations {
         List<Integer> operands = new ArrayList<Integer>();
         List<String> operators = getOperators(splittedExpression, operands);
 
-        Operations op = new Operations();
-        int result = computeMultipleOperands(operands, operators, op);
+        int result = computeMultipleOperands(operands, operators);
         return result;
     }
 
-    public int evaluateExpressionWithParanthesis(String Expression) {
-        StringBuffer expression = new StringBuffer(Expression);
-        int FinalResult = 0;
-        int startIndex = expression.indexOf("(");
+    public String evaluateWithBrackets(String expression) throws Exception {
+        StringBuffer sb = new StringBuffer(expression);
         int endIndex = expression.indexOf(")");
+        int startIndex = expression.indexOf("(");
+        String expressionInBrackets = expression.substring(startIndex + 1, endIndex);
+        int res = evaluateExpressionWithParanthesis(expressionInBrackets);
+        sb.replace(startIndex, endIndex + 1, Integer.toString(res));
+        return sb.toString();
+    }
 
-        if (startIndex == -1)
-            FinalResult = evaluateMultipleOperands(Expression.split(" "));
-
-        else if (startIndex > 0) {
-            String newstr = expression.substring(startIndex + 1, endIndex);
-            Integer result = evaluateMultipleOperands(newstr.split(" "));
-            StringBuffer ModifiedStr = expression.replace(startIndex, endIndex + 1, result.toString());
-            return evaluateExpressionWithParanthesis(ModifiedStr.toString());
+    public int evaluateExpressionWithParanthesis(String expression) throws Exception {
+        String[] data = expression.split(" ");
+        int result;
+        if (expression.contains("(")) {
+            String res = evaluateWithBrackets(expression);
+            return evaluateExpressionWithParanthesis(res);
         }
-        return FinalResult;
+        List<Integer> operands = new ArrayList<Integer>();
+        List<String> operators = getOperators(data, operands);
+        result = computeMultipleOperands(operands, operators);
+        return result;
     }
 }
