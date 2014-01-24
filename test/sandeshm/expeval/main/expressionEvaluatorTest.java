@@ -209,23 +209,6 @@ public class expressionEvaluatorTest {
     }
 
     @Test
-    public void testEvaluateExpressionShouldvalidateBrackets() throws Exception {
-        expressionEvaluator eval = new expressionEvaluator();
-
-        boolean actual = eval.validateBracketsInExpression("2 +        2*(3 * 2+1) + 9)");
-        boolean expected = false;
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void testEvaluateExpressionShouldvalidateBrackets2() throws Exception {
-        expressionEvaluator eval = new expressionEvaluator();
-
-        boolean actual = eval.validateBracketsInExpression("2 + ((2*(3 * 2+1) + 9))");
-        boolean expected = true;
-        assertEquals(actual, expected);
-    }
-    @Test
     public void testEvaluateExpressionShouldReturnDifferenceBetweenNumbers() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
         double actual = eval.evaluateExpression("5     + -2");
@@ -240,4 +223,13 @@ public class expressionEvaluatorTest {
         double expected = 4.0;
         assertEquals(actual, expected);
     }
+
+    @Test
+    public void testEvaluateExpressionShouldReturnDifferenceBetweenNumbersWithBrackets2() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+        double actual = eval.evaluateExpression("5 + (-2 *(-2 + 1))");
+        double expected = 7.0;
+        assertEquals(actual, expected);
+    }
+
 }
