@@ -261,8 +261,8 @@ public class expressionEvaluatorTest {
     @Test
     public void testEvaluateExpression4() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
-        double actual = eval.evaluateExpression("22");
-        double expected = 22;
+        double actual = eval.evaluateExpression("33");
+        double expected = 33.0;
         assertEquals(actual, expected);
     }
 
@@ -280,5 +280,13 @@ public class expressionEvaluatorTest {
         double actual = eval.evaluateExpression("2 ^             -3");
         double expected = 0.125;
         assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testEvaluateExpression123() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+        double actual = eval.evaluateExpression("22 *");
+//        double expected = 0.5;
+//        assertEquals(actual, expected);
     }
 }

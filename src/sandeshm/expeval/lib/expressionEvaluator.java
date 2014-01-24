@@ -6,7 +6,6 @@ public class expressionEvaluator {
         Operations operate = new Operations();
         String newExpression = operate.replaceExpression(expression);
 
-
         String[] splittedExpression = newExpression.split(" ");
         if (isParanthesisInExpr != -1)
             return operate.evaluateExpressionWithParanthesis(newExpression);
