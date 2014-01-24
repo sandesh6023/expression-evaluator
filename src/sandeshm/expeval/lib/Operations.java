@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Operations {
-
     public double evaluate(String operator, double operand1, double operand2) {
         double result = 0;
         if (operator.equals("+"))
@@ -16,7 +15,7 @@ class Operations {
         if (operator.equals("*"))
             result = operand1 * operand2;
         if (operator.equals("^"))
-            result =  Math.pow(operand1, operand2);
+            result = Math.pow(operand1, operand2);
         return result;
     }
 
@@ -82,6 +81,8 @@ class Operations {
         result = computeMultipleOperands(operands, operators);
         return result;
     }
+
+
     public String replaceExpression(String expression) {
         return expression.trim().replaceAll(" +", "")
                 .replaceAll("\\+", " + ")
@@ -91,6 +92,8 @@ class Operations {
                 .replaceAll("\\(", "(")
                 .replaceAll("\\)", ")")
                 .replaceAll("\\^", " ^ ")
-                .replaceFirst("^ - ", "-");
+                .replaceAll("  - ", " -")
+                .replaceFirst("^ - ", "-")
+                .replaceAll("\\( - ", "(-");
     }
 }

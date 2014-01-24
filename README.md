@@ -68,3 +68,5 @@ set the environment variable as
 #### VERSION 0.5
     ##The product will handle float and Negative numbers.
 
+#### VERSION 0.6
+    ##The product will handle spaces and wrong inputs with brackests are validated.

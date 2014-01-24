@@ -1,10 +1,3 @@
 RELEASE NOTES
 
-0.4 developed
-
-operations that are not supported
- --> Input of this type is not handled.
-2) Input like 2 ^ 31 is not handled. it will not give proper output
-
-3)Input validation is not done.
-4)Divide by zero is not handled.
+0.6 developed

@@ -1,6 +1,7 @@
 package sandeshm.expeval.main;
 
 import static junit.framework.Assert.assertEquals;
+
 import org.junit.Test;
 import sandeshm.expeval.lib.expressionEvaluator;
 
@@ -9,10 +10,11 @@ public class expressionEvaluatorTest {
     public void testEvaluateExpressionShouldReturnSumOfNumbers() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
 
-        double actual = eval.evaluateExpression("2           +             3");
+        double actual = eval.evaluateExpression("2 + 3");
         double expected = 5.0;
-        assertEquals(actual,expected);
+        assertEquals(actual, expected);
     }
+
 
     @Test
     public void testEvaluateExpressionShouldSubtractNumbers() throws Exception {
@@ -36,7 +38,7 @@ public class expressionEvaluatorTest {
     public void testEvaluateExpressionShouldMultiplyNumbers() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
 
-        double actual = eval.evaluateExpression("12*3");
+        double actual = eval.evaluateExpression("12 * 3");
         double expected = 36;
         assertEquals(actual, expected);
     }
@@ -63,7 +65,7 @@ public class expressionEvaluatorTest {
     public void testShouldEvaluateMultipleOperands2() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
 
-        double actual = eval.evaluateExpression("2 +   4 - 3 * 2");
+        double actual = eval.evaluateExpression("2 + 4 - 3 * 2");
         double expected = 6;
         assertEquals(actual, expected);
     }
@@ -165,6 +167,77 @@ public class expressionEvaluatorTest {
 
         double actual = eval.evaluateExpression("(3 +  ((6*       9)+ 1)+3)");
         double expected = 61;
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testEvaluateExpressionShouldReturnSumOfNumbersHandlesSpaces3() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        double actual = eval.evaluateExpression("2 +                     3");
+        double expected = 5.0;
+        assertEquals(actual, expected);
+    }
+
+    @Test
+
+    public void testEvaluateExpressionShouldReturnSumOfNumbersHandlesSpaces4() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        double actual = eval.evaluateExpression("2 +        3 * 2");
+        double expected = 10.0;
+        assertEquals(actual, expected);
+    }
+
+    @Test
+
+    public void testEvaluateExpressionShouldReturnSumOfNumbersHandlesSpaces5() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        double actual = eval.evaluateExpression("2 +        (3 * 2+1)");
+        double expected = 9.0;
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testEvaluateExpressionShouldReturnSumOfNumbersHandlesSpaces6() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        double actual = eval.evaluateExpression("2 +        (2*(3 * 2+1) + 9)");
+        double expected = 25.0;
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testEvaluateExpressionShouldvalidateBrackets() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        boolean actual = eval.validateBracketsInExpression("2 +        2*(3 * 2+1) + 9)");
+        boolean expected = false;
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testEvaluateExpressionShouldvalidateBrackets2() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+
+        boolean actual = eval.validateBracketsInExpression("2 + ((2*(3 * 2+1) + 9))");
+        boolean expected = true;
+        assertEquals(actual, expected);
+    }
+    @Test
+    public void testEvaluateExpressionShouldReturnDifferenceBetweenNumbers() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+        double actual = eval.evaluateExpression("5     + -2");
+        double expected = 3.0;
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testEvaluateExpressionShouldReturnDifferenceBetweenNumbersWithBrackets() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+        double actual = eval.evaluateExpression("5 + (-2 + 1)");
+        double expected = 4.0;
         assertEquals(actual, expected);
     }
 }
