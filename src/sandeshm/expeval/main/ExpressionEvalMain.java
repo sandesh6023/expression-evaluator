@@ -8,3 +8,7 @@ public class ExpressionEvalMain {
         System.out.println(eval.evaluateExpression(args[0]));
     }
 }
+//        if (!expression.contains(" ")) {
+//            String newExpr = expression.replaceAll("\\(","").replaceAll("\\)","");
+//            return Double.parseDouble(newExpr);
+//        }

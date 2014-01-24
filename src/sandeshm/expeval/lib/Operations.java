@@ -68,17 +68,15 @@ class Operations {
     }
 
     public double evaluateExpressionWithParanthesis(String expression) throws Exception {
-        if (!expression.contains(" ")) {
-            String newExpr = expression.replaceAll("\\(","").replaceAll("\\)","");
-            return Double.parseDouble(newExpr);
-        }
-
-        String[] data = expression.split(" ");
+        String exp = replaceExpression(expression);
         double result;
         if (expression.contains("(")) {
             String res = evaluateWithBrackets(expression);
             return evaluateExpressionWithParanthesis(res);
         }
+        if (!exp.contains(" ")) return Double.parseDouble(exp);
+        String[] data = exp.split(" ");
+
         List<Double> operands = new ArrayList<Double>();
         List<String> operators = getOperators(data, operands);
         result = computeMultipleOperands(operands, operators);

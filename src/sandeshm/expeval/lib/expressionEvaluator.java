@@ -5,7 +5,7 @@ public class expressionEvaluator {
         int isParanthesisInExpr = expression.indexOf('(');
         Operations operate = new Operations();
         String newExpression = operate.replaceExpression(expression);
-        String[] splittedExpression = newExpression.split("\\s+");
+        String[] splittedExpression = newExpression.split(" ");
         if (isParanthesisInExpr != -1)
             return operate.evaluateExpressionWithParanthesis(newExpression);
 
