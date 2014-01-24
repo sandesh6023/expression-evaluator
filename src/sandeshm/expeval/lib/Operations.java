@@ -68,7 +68,10 @@ class Operations {
     }
 
     public double evaluateExpressionWithParanthesis(String expression) throws Exception {
-        if (!expression.contains(" ")) return Double.parseDouble(expression);
+        if (!expression.contains(" ")) {
+            String newExpr = expression.replaceAll("\\(","").replaceAll("\\)","");
+            return Double.parseDouble(newExpr);
+        }
 
         String[] data = expression.split(" ");
         double result;
@@ -93,7 +96,7 @@ class Operations {
                 .replaceAll("\\)", ")")
                 .replaceAll("\\^", " ^ ")
                 .replaceAll("  - ", " -")
-                .replaceFirst("^ - ", "-")
+                .replaceAll("^ - ", "-")
                 .replaceAll("\\( - ", "(-");
     }
 }

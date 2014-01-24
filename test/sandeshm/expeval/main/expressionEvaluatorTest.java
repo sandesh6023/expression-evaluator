@@ -259,11 +259,18 @@ public class expressionEvaluatorTest {
     }
 
     @Test
-    public void testEvaluateExpressionPowerOfNegativeNumber() throws Exception {
+    public void testEvaluateExpression4() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
-        double actual = eval.evaluateExpression("2 ^-3");
-        double expected = 0.125;
+        double actual = eval.evaluateExpression("((((-1))))");
+        double expected = -1;
         assertEquals(actual, expected);
     }
 
+    @Test
+    public void testEvaluateExpressionPowerOfNegativeNumber() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
+        double actual = eval.evaluateExpression("2 ^             -3");
+        double expected = 0.125;
+        assertEquals(actual, expected);
+    }
 }
