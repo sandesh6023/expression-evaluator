@@ -261,6 +261,14 @@ public class expressionEvaluatorTest {
     @Test
     public void testEvaluateExpression4() throws Exception {
         expressionEvaluator eval = new expressionEvaluator();
+        double actual = eval.evaluateExpression("22");
+        double expected = 22;
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testEvaluateExpression5() throws Exception {
+        expressionEvaluator eval = new expressionEvaluator();
         double actual = eval.evaluateExpression("((((-1))))");
         double expected = -1;
         assertEquals(actual, expected);

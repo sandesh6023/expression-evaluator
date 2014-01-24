@@ -33,6 +33,9 @@ class Operations {
 
     public double computeMultipleOperands(List<Double> operands, List<String> operators) {
         Operations operate = new Operations();
+        if (operands.size() <= 1)
+            return operands.get(0);
+
         double result = operate.evaluate(operators.get(0), operands.get(0), operands.get(1));
         for (int i = 1; i < operators.size(); i++) {
             result = operate.evaluate(operators.get(i), result, operands.get(i + 1));
