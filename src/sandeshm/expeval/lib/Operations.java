@@ -20,18 +20,6 @@ class Operations {
         return result;
     }
 
-    public List<String> getOperators(String[] splittedExp, List<Double> operands) {
-        List<String> operators = new ArrayList<String>();
-        for (String s : splittedExp) {
-            try {
-                operands.add(Double.parseDouble(s));
-            } catch (Exception ex) {
-                operators.add(s);
-            }
-        }
-        return operators;
-    }
-
     public double computeMultipleOperands(List<Double> operands, List<String> operators) {
         Operations operate = new Operations();
         double result = operate.evaluate(operators.get(0), operands.get(0), operands.get(1));
@@ -42,9 +30,32 @@ class Operations {
         return result;
     }
 
-    public double evaluateExpressionWithoutBrackets(String[] splittedExpression) {
+    private boolean isOperator(String s) {
+        String possibleOperators = "+-*/^";
+        return possibleOperators.contains(s);
+    }
+
+    public List<String> getOperators(String[] splittedExp) {
+        List<String> operators = new ArrayList<String>();
+        for (String s : splittedExp) {
+            if(isOperator(s))
+                operators.add(s);
+        }
+        return operators;
+    }
+
+    private List<Double> getOperands(String[] splittedExpression) {
         List<Double> operands = new ArrayList<Double>();
-        List<String> operators = getOperators(splittedExpression, operands);
+        for (String s : splittedExpression) {
+            if(!isOperator(s))
+                operands.add(Double.parseDouble(s));
+        }
+        return operands;
+    }
+
+    public double evaluateExpressionWithoutBrackets(String[] splittedExpression) {
+        List<Double> operands = getOperands(splittedExpression);
+        List<String> operators = getOperators(splittedExpression);
         if(operands.size() == 1 && operators.size() == 0)
             return operands.get(0);
 
@@ -79,10 +90,10 @@ class Operations {
             return evaluateExpressionWithParanthesis(res);
         }
         if (!exp.contains(" ")) return Double.parseDouble(exp);
-        String[] data = exp.split(" ");
+        String[] splittedExpression = exp.split(" ");
 
-        List<Double> operands = new ArrayList<Double>();
-        List<String> operators = getOperators(data, operands);
+        List<Double> operands = getOperands(splittedExpression);
+        List<String> operators = getOperators(splittedExpression);
         result = computeMultipleOperands(operands, operators);
         return result;
     }
