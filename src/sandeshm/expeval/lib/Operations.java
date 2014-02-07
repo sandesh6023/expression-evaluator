@@ -38,7 +38,7 @@ class Operations {
     public List<String> getOperators(String[] splittedExp) {
         List<String> operators = new ArrayList<String>();
         for (String s : splittedExp) {
-            if(isOperator(s))
+            if (isOperator(s))
                 operators.add(s);
         }
         return operators;
@@ -47,7 +47,7 @@ class Operations {
     private List<Double> getOperands(String[] splittedExpression) {
         List<Double> operands = new ArrayList<Double>();
         for (String s : splittedExpression) {
-            if(!isOperator(s))
+            if (!isOperator(s))
                 operands.add(Double.parseDouble(s));
         }
         return operands;
@@ -56,46 +56,28 @@ class Operations {
     public double evaluateExpressionWithoutBrackets(String[] splittedExpression) {
         List<Double> operands = getOperands(splittedExpression);
         List<String> operators = getOperators(splittedExpression);
-        if(operands.size() == 1 && operators.size() == 0)
+        if (operands.size() == 1 && operators.size() == 0)
             return operands.get(0);
 
         double result = computeMultipleOperands(operands, operators);
         return result;
     }
 
-    public String evaluateWithBrackets(String expression) throws Exception {
-        StringBuffer exprWithBracket = new StringBuffer(expression);
-        int startIndex = 0;
-        int endIndex = 0;
-        for (int i = 0; i < expression.length(); i++) {
-            if (expression.charAt(i) == '(') {
-                startIndex = i;
-            }
-            if (expression.charAt(i) == ')') {
-                endIndex = i;
-                break;
-            }
-        }
-        String expressionInBrackets = expression.substring(startIndex + 1, endIndex);
-        double result = evaluateExpressionWithParanthesis(expressionInBrackets);
-        exprWithBracket.replace(startIndex, endIndex + 1, Double.toString(result));
-        return exprWithBracket.toString();
-    }
 
     public double evaluateExpressionWithParanthesis(String expression) throws Exception {
         String exp = replaceExpression(expression);
-        double result;
+        Double result;
         if (expression.contains("(")) {
-            String res = evaluateWithBrackets(expression);
-            return evaluateExpressionWithParanthesis(res);
+            int startIndex = expression.lastIndexOf("(");
+            int lastIndex = expression.indexOf(")", startIndex);
+            String expressionInBrackets = expression.substring(startIndex + 1, lastIndex);
+            result = evaluateExpressionWithParanthesis(expressionInBrackets);
+            expression = expression.replace("(" + expressionInBrackets + ")", result.toString());
+            return evaluateExpressionWithParanthesis(expression);
         }
         if (!exp.contains(" ")) return Double.parseDouble(exp);
         String[] splittedExpression = exp.split(" ");
-
-        List<Double> operands = getOperands(splittedExpression);
-        List<String> operators = getOperators(splittedExpression);
-        result = computeMultipleOperands(operands, operators);
-        return result;
+        return evaluateExpressionWithoutBrackets(splittedExpression);
     }
 
 
