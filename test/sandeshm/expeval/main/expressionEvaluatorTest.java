@@ -281,12 +281,4 @@ public class expressionEvaluatorTest {
         double expected = 0.125;
         assertEquals(actual, expected);
     }
-
-    @Test
-    public void testEvaluateExpression123() throws Exception {
-        expressionEvaluator eval = new expressionEvaluator();
-        double actual = eval.evaluateExpression("22 *");
-//        double expected = 0.5;
-//        assertEquals(actual, expected);
-    }
 }

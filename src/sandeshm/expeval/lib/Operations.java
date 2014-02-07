@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Operations {
+
     public double evaluate(String operator, double operand1, double operand2) {
         double result = 0;
         if (operator.equals("+"))
@@ -41,7 +42,7 @@ class Operations {
         return result;
     }
 
-    public double evaluateMultipleOperands(String[] splittedExpression) {
+    public double evaluateExpressionWithoutBrackets(String[] splittedExpression) {
         List<Double> operands = new ArrayList<Double>();
         List<String> operators = getOperators(splittedExpression, operands);
         if(operands.size() == 1 && operators.size() == 0)
