@@ -7,7 +7,7 @@ public class expressionEvaluator {
 
         String[] expressionParts = newExpression.split(" ");
         if (expression.contains("(")) {
-            return operate.evaluateExpressionWithParanthesis(newExpression);
+            return operate.evaluateExpressionWithParantheses(newExpression);
         }
         return operate.evaluateExpressionWithoutBrackets(expressionParts);
 
