@@ -5,11 +5,11 @@ public class expressionEvaluator {
         Operations operate = new Operations();
         String newExpression = operate.replaceExpression(expression);
 
-        String[] expressionParts = newExpression.split(" ");
-        if (expression.contains("(")) {
-            return operate.evaluateExpressionWithParantheses(newExpression);
-        }
-        return operate.evaluateExpressionWithoutBrackets(expressionParts);
+//        String[] expressionParts = newExpression.split(" ");
+//        if (expression.contains("(")) {
+//            return operate.evaluateExpressionWithParantheses(newExpression);
+//        }
+        return operate.evaluateExpressionWithoutBrackets(newExpression);
 
     }
 }

@@ -39,7 +39,10 @@ class Operations {
         return operands;
     }
 
-    public double evaluateExpressionWithoutBrackets(String[] splittedExpression) {
+    public double evaluateExpressionWithoutBrackets(String Expression) throws Exception {
+        if(Expression.contains("("))
+            Expression = evaluateExpressionWithParantheses(Expression);
+        String[] splittedExpression = Expression.split(" ");
         List<Double> operands = getOperands(splittedExpression);
         List<String> operators = getOperators(splittedExpression);
 
@@ -51,20 +54,16 @@ class Operations {
     }
 
 
-    public double evaluateExpressionWithParantheses(String expression) throws Exception {
-        String exp = replaceExpression(expression);
+    public String evaluateExpressionWithParantheses(String expression) throws Exception {
         Double result;
-        if (expression.contains("(")) {
+        while (expression.contains("(")) {
             int startIndex = expression.lastIndexOf("(");
             int lastIndex = expression.indexOf(")", startIndex);
             String expressionInBrackets = expression.substring(startIndex + 1, lastIndex);
-            result = evaluateExpressionWithParantheses(expressionInBrackets);
+            result = evaluateExpressionWithoutBrackets(expressionInBrackets);
             expression = expression.replace("(" + expressionInBrackets + ")", result.toString());
-            return evaluateExpressionWithParantheses(expression);
         }
-        if (!exp.contains(" ")) return Double.parseDouble(exp);
-        String[] splittedExpression = exp.split(" ");
-        return evaluateExpressionWithoutBrackets(splittedExpression);
+        return expression;
     }
 
     public String replaceExpression(String expression) {
