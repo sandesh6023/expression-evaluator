@@ -5,23 +5,9 @@ import java.util.List;
 
 class Operations {
 
-    public double evaluate(String operator, double operand1, double operand2) {
-        double result = 0;
-        if (operator.equals("+"))
-            result = operand1 + operand2;
-        if (operator.equals("-"))
-            result = operand1 - operand2;
-        if (operator.equals("/"))
-            result = operand1 / operand2;
-        if (operator.equals("*"))
-            result = operand1 * operand2;
-        if (operator.equals("^"))
-            result = Math.pow(operand1, operand2);
-        return result;
-    }
 
     public double computeMultipleOperands(List<Double> operands, List<String> operators) {
-        Operations operate = new Operations();
+        Operator operate = new Operator();
         double result = operate.evaluate(operators.get(0), operands.get(0), operands.get(1));
 
         for (int i = 1; i < operators.size(); i++) {
