@@ -3,10 +3,11 @@ package sandeshm.expeval.lib;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Operations {
+public class Expression {
+    List<Double> operands;
+    List<String> operators;
 
-
-    public double computeMultipleOperands(List<Double> operands, List<String> operators) {
+    public double computeMultipleOperands() {
         Operator operate = new Operator();
         double result = operate.evaluate(operators.get(0), operands.get(0), operands.get(1));
 
@@ -21,22 +22,20 @@ public class Operations {
         return possibleOperators.contains(s);
     }
 
-    public List<String> getOperators(String[] splittedExp) {
-        List<String> operators = new ArrayList<String>();
+    public void getOperators(String[] splittedExp) {
+        this.operators = new ArrayList<String>();
         for (String s : splittedExp) {
             if (isOperator(s))
-                operators.add(s);
+                this.operators.add(s);
         }
-        return operators;
     }
 
-    private List<Double> getOperands(String[] splittedExpression) {
-        List<Double> operands = new ArrayList<Double>();
+    private void getOperands(String[] splittedExpression) {
+        this.operands = new ArrayList<Double>();
         for (String s : splittedExpression) {
             if (!isOperator(s))
-                operands.add(Double.parseDouble(s));
+                this.operands.add(Double.parseDouble(s));
         }
-        return operands;
     }
 
     public double evaluateExpression(String Expression) throws Exception {
@@ -44,13 +43,13 @@ public class Operations {
         if(Expression.contains("("))
             Expression = evaluateExpressionWithParantheses(Expression);
         String[] splittedExpression = Expression.split(" ");
-        List<Double> operands = getOperands(splittedExpression);
-        List<String> operators = getOperators(splittedExpression);
+        getOperands(splittedExpression);
+        getOperators(splittedExpression);
 
         if (operands.size() == 1 && operators.size() == 0)
             return operands.get(0);
 
-        double result = computeMultipleOperands(operands, operators);
+        double result = computeMultipleOperands();
         return result;
     }
 
