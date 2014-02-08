@@ -27,16 +27,16 @@ public class ExpressionTest {
 
     @Test
     public void testSimpleExpressionEquality() throws Exception {
-        Expression actual = new SimpleExpression(new ValueExpression(2.0),new ValueExpression(3.0), new Plus());
-        Expression expected = new SimpleExpression(new ValueExpression(2.0),new ValueExpression(3.0), new Plus());
+        Expression actual = new SimpleExpression(new ValueExpression(2.0), new ValueExpression(3.0), new Plus());
+        Expression expected = new SimpleExpression(new ValueExpression(2.0), new ValueExpression(3.0), new Plus());
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void testSimpleExpressionInequality() throws Exception {
-        Expression actual = new SimpleExpression(new ValueExpression(2.0),new ValueExpression(3.0), new Plus());
-        Expression expected = new SimpleExpression(new ValueExpression(2.0),new ValueExpression(3.1) , new Plus());
+        Expression actual = new SimpleExpression(new ValueExpression(2.0), new ValueExpression(3.0), new Plus());
+        Expression expected = new SimpleExpression(new ValueExpression(2.0), new ValueExpression(3.1), new Plus());
 
         assertFalse(expected.equals(actual));
     }
@@ -51,7 +51,7 @@ public class ExpressionTest {
 
     @Test
     public void testEvaluateExpression() throws Exception {
-        Expression actual = new SimpleExpression(new ValueExpression(2.0),new ValueExpression(3.0), new Plus());
+        Expression actual = new SimpleExpression(new ValueExpression(2.0), new ValueExpression(3.0), new Plus());
         Expression expected = new ValueExpression(5.0);
 
         assertEquals(expected, actual.evaluateExpression());
@@ -83,7 +83,7 @@ public class ExpressionTest {
 
     @Test
     public void testEvaluateExpressionForPowerOf() throws Exception {
-        Expression actual = new SimpleExpression(new ValueExpression(2.0),new ValueExpression(3.0), new Power());
+        Expression actual = new SimpleExpression(new ValueExpression(2.0), new ValueExpression(3.0), new Power());
         Expression expected = new ValueExpression(8.0);
 
         assertEquals(expected, actual.evaluateExpression());
@@ -91,8 +91,19 @@ public class ExpressionTest {
 
 //    @Test
 //    public void testEvaluateExpressionForMultipleOperators() throws Exception {
-//       Expression actual = new SimpleExpression(
-//               new SimpleExpression( new ValueExpression(2.0),new ValueExpression(3.0),new Plus() ).evaluateExpression(),
-//               new ValueExpression(5.0),new Plus());
+//        ValueExpression left = new SimpleExpression(new ValueExpression(2.0), new ValueExpression(3.0), new Plus()).evaluateExpression();
+//        ValueExpression actual = new SimpleExpression( left, new ValueExpression(3.0), new Plus()).evaluateExpression() ;
+//        ValueExpression expected = new ValueExpression(8.0);
+//        assertEquals(expected, actual);
+//
 //    }
+
+    @Test
+    public void testEvaluateExpressionForMultipleOperators() throws Exception {
+        Expression left = new SimpleExpression(new ValueExpression(2.0),new ValueExpression(3.0),new Plus());
+        Expression actual = new SimpleExpression(left,new ValueExpression(5.0),new Plus());
+        ValueExpression expected = new ValueExpression(10.0);
+        assertEquals(expected, actual.evaluateExpression());
+
+    }
 }

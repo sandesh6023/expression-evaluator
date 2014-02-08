@@ -1,11 +1,11 @@
 package sandeshm.expeval.lib;
 
 public class SimpleExpression implements Expression{
-    private ValueExpression leftHandSide;
-    private ValueExpression rightHandSide;
+    private Expression leftHandSide;
+    private Expression rightHandSide;
     private Operation operator;
 
-    public SimpleExpression(ValueExpression leftHandSide, ValueExpression rightHandSide, Operation operator) {
+    public SimpleExpression(Expression leftHandSide, Expression rightHandSide, Operation operator) {
 
         this.leftHandSide = leftHandSide;
         this.rightHandSide = rightHandSide;
@@ -37,7 +37,7 @@ public class SimpleExpression implements Expression{
     }
 
     @Override
-    public Expression evaluateExpression() {
+    public ValueExpression evaluateExpression() {
         return new ValueExpression(operator.evaluateExpression(this.leftHandSide,this.rightHandSide));
     }
 }

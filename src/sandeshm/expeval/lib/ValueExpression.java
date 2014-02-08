@@ -66,7 +66,7 @@ public class ValueExpression implements Expression {
     }
 
     @Override
-    public Expression evaluateExpression() {
+    public ValueExpression evaluateExpression() {
         return new ValueExpression(this.value);
     }
 
