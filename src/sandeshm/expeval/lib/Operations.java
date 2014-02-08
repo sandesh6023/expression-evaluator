@@ -3,7 +3,7 @@ package sandeshm.expeval.lib;
 import java.util.ArrayList;
 import java.util.List;
 
-class Operations {
+public class Operations {
 
 
     public double computeMultipleOperands(List<Double> operands, List<String> operators) {
@@ -39,7 +39,8 @@ class Operations {
         return operands;
     }
 
-    public double evaluateExpressionWithoutBrackets(String Expression) throws Exception {
+    public double evaluateExpression(String Expression) throws Exception {
+        Expression = replaceExpression(Expression);
         if(Expression.contains("("))
             Expression = evaluateExpressionWithParantheses(Expression);
         String[] splittedExpression = Expression.split(" ");
@@ -60,7 +61,7 @@ class Operations {
             int startIndex = expression.lastIndexOf("(");
             int lastIndex = expression.indexOf(")", startIndex);
             String expressionInBrackets = expression.substring(startIndex + 1, lastIndex);
-            result = evaluateExpressionWithoutBrackets(expressionInBrackets);
+            result = evaluateExpression(expressionInBrackets);
             expression = expression.replace("(" + expressionInBrackets + ")", result.toString());
         }
         return expression;
