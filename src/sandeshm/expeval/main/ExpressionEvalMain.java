@@ -1,11 +1,10 @@
 package sandeshm.expeval.main;
 
-import sandeshm.expeval.lib.Expression;
+import sandeshm.expeval.lib.Parser;
 
 public class ExpressionEvalMain {
     public static void main(String[] args) throws Exception {
-        Expression operate = new Expression();
-        System.out.println(operate.evaluateExpression(args[0]));
+        System.out.println(Parser.create(args[0]).getExpression().evaluate());
     }
 }
 
