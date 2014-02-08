@@ -38,6 +38,6 @@ public class SimpleExpression implements Expression{
 
     @Override
     public ValueExpression evaluateExpression() {
-        return new ValueExpression(operator.evaluateExpression(this.leftHandSide,this.rightHandSide));
+    return new ValueExpression(operator.evaluateExpression(this.leftHandSide,this.rightHandSide));
     }
 }
